@@ -1,0 +1,19 @@
+{
+  "name": "typescript-dpi",
+  "version": "1.0.0",
+  "description": "Sample project for using dependency injection with typescript and apply design patterns",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DlopezS98/typescript-dependency-injection.git"
+  },
+  "author": "Danny López",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DlopezS98/typescript-dependency-injection/issues"
+  },
+  "homepage": "https://github.com/DlopezS98/typescript-dependency-injection#readme"
+}
