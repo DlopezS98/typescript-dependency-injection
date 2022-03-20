@@ -22,6 +22,8 @@
         "prettier"
     ],
     "rules": {
+        "import/no-unresolved": 0,
+        "class-methods-use-this": 0,
         "@typescript-eslint/no-empty-interface": "error",
         "semi": [
             "error",
@@ -94,6 +96,11 @@
         ],
         "@typescript-eslint/no-throw-literal": [
             "error"
-        ]
+        ],
+        "import/extensions": ["error", {
+            "js": "never",
+            "ts": "never",
+            "json": "always"
+          }]
     }
 }
