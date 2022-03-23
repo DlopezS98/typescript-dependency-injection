@@ -1,15 +1,23 @@
+import { controller, httpGet } from 'inversify-express-utils';
+
 import UserDto from '@Shared/Dtos/responses/users.dto';
 import { Response, Request } from 'express';
+import UsersService from '@Services/users.service';
 
+@controller('/api/users')
 export default class UsersController {
-  public getUsers = (
+  private readonly usersService: UsersService;
+
+  constructor(usersService: UsersService) {
+    this.usersService = usersService;
+  }
+
+  @httpGet('/')
+  public getUsers(
     req: Request,
-    resp: Response<UserDto>
-  ): Response<UserDto> =>
-    resp.status(200).json({
-      id: '12',
-      fullname: 'Danny Lopez',
-      createdAt: new Date(),
-      username: 'DlopezS98',
-    });
+    resp: Response<Array<UserDto>>
+  ): Response<Array<UserDto>> {
+    const users = this.usersService.getAll();
+    return resp.status(200).json(users);
+  }
 }

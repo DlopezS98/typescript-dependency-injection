@@ -1,36 +1,54 @@
-import express, { Express, urlencoded, json, Request, Response } from 'express';
+import {
+  urlencoded,
+  json,
+  Request,
+  Response,
+  Application as ExpressApp,
+} from 'express';
+import { InversifyExpressServer } from 'inversify-express-utils';
 import cors from 'cors';
 import morgan from 'morgan';
+import { Container } from 'inversify';
+
+import '@Controllers/users.controller';
 import Environment from '@Config/environment';
-import UsersRoutes from '@Routes/users.routes';
-import UsersController from '@Controllers/users.controller';
 import pkg from '../package.json';
 
-const app: Express = express();
-const environment = new Environment();
-const userRoutes = new UsersRoutes(new UsersController());
+export default class Application {
+  private readonly server: InversifyExpressServer;
+  private readonly environment: Environment;
 
-// settings
-app.set('port', environment.PORT);
-app.set('pkg', pkg);
+  constructor(container: Container, environment: Environment) {
+    this.server = new InversifyExpressServer(container);
+    this.environment = environment;
+  }
 
-// middlewares
-app.use(morgan('dev'));
-app.use(cors());
-app.use(urlencoded({ extended: false }));
-app.use(json());
+  public initialize(): ExpressApp {
+    this.server.setConfig((app) => {
+      // settings
+      app.set('port', this.environment.PORT);
+      app.set('pkg', pkg);
 
-// mapped routes
-app.use('/api/users', userRoutes.initialize());
+      // middlewares
+      app.use(morgan('dev'));
+      app.use(cors());
+      app.use(urlencoded({ extended: false }));
+      app.use(json());
 
-app.get('/', async (req: Request, res: Response) => {
-  res.status(200).json({
-    message: 'Example api',
-    name: app.get('pkg').name,
-    version: app.get('pkg').version,
-    description: app.get('pkg').description,
-    author: app.get('pkg').author,
-  });
-});
+      app.get('/', (req: Request, res: Response) => this.index(req, res, app));
+      return app;
+    });
 
-export default app;
+    return this.server.build();
+  }
+
+  private index(req: Request, res: Response, app: ExpressApp): Response {
+    return res.status(200).json({
+      message: 'Example api',
+      name: app.get('pkg').name,
+      version: app.get('pkg').version,
+      description: app.get('pkg').description,
+      author: app.get('pkg').author,
+    });
+  }
+}
