@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/src/index.js",
-    "dev": "set NODE_ENV=development && nodemon src/index.ts",
+    "start": "cross-env NODE_ENV=production node dist/src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "dev:debug": "nodemon --inspect src/index.ts",
-    "build": "tsc && tsc-alias"
+    "build": "tsc && tsc-alias",
+    "set:prod": "export NODE_ENV= || set NODE_ENV=test"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "inversify": "^6.0.1",
