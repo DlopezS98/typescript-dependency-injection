@@ -30,9 +30,10 @@
     "baseUrl": ".",                                      /* Specify the base directory to resolve non-relative module names. */
     "paths": {                                           /* Specify a set of entries that re-map imports to additional lookup locations. */
       "@Database/*": ["src/core/database/*"],
-      "@Controllers/*": ["src/core/controllers/*"],
+      "@Controllers/*": ["src/controllers/*"],
       "@Repositories/*": ["src/core/repositories/*"],
       "@Services/*": ["src/core/services/*"],
+      "@Interfaces/*": ["src/core/interfaces/*"],
       "@Routes/*": ["src/routes/*"],
       "@Shared/*": ["src/shared/*"],
       "@Config/*": ["src/config/*"]

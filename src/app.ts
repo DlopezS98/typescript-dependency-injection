@@ -1,7 +1,7 @@
 import {
   urlencoded,
   json,
-  Application as ExpressApp,
+  Application as ExpressApp
 } from 'express';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import cors from 'cors';
@@ -12,14 +12,14 @@ import Environment from '@Config/environment';
 import pkg from '../package.json';
 
 // controllers
-import '@Controllers/controllers.mapping.ts';
+import'@Controllers/controllers.mapping';
 
 export default class Application {
   private readonly server: InversifyExpressServer;
   private readonly environment: Environment;
 
   constructor(container: Container, environment: Environment) {
-    this.server = new InversifyExpressServer(container);
+    this.server = new InversifyExpressServer(container, null, { rootPath: '/api/v1' });
     this.environment = environment;
   }
 

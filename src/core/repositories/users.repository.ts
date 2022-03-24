@@ -1,15 +1,14 @@
-/* eslint-disable no-useless-constructor */
 import { injectable } from 'inversify';
 
 import DatabaseContext from '@Database/database.context';
 import Users from '@Database/models/users.model';
+import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 
 @injectable()
-export default class UsersRepository {
-  constructor(private readonly dbContext: DatabaseContext) {}
-
-  getAll(): Array<Users> {
-    return [
+export default class UsersRepository implements IUsersRepository {
+  private readonly users: Array<Users>;
+  constructor(private readonly dbContext: DatabaseContext) {
+    this.users = [
       {
         id: '1200012',
         firstname: 'Danny',
@@ -28,4 +27,12 @@ export default class UsersRepository {
       },
     ];
   }
+
+  getAll(): Array<Users> {
+    return this.users;
+  }
+
+  getById(id: string): Users | undefined {
+    return this.users.find(user => user.id === id);
+  };
 }

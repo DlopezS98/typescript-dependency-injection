@@ -1,14 +1,22 @@
-import { controller, httpGet } from 'inversify-express-utils';
+import {
+  controller,
+  httpGet,
+  requestParam,
+  response
+} from 'inversify-express-utils';
 
 import UserDto from '@Shared/Dtos/responses/users.dto';
 import { Response, Request } from 'express';
-import UsersService from '@Services/users.service';
+// import UsersService from '@Services/users.service';
+import IUsersService from '@Interfaces/services/iusers.service';
+import { inject } from 'inversify';
+import KeysMapping from '@Interfaces/interfaces.mapping';
 
-@controller('/api/users')
+@controller('/users')
 export default class UsersController {
-  private readonly usersService: UsersService;
+  private readonly usersService: IUsersService;
 
-  constructor(usersService: UsersService) {
+  constructor(@inject(KeysMapping.IUsersService) usersService: IUsersService) {
     this.usersService = usersService;
   }
 
@@ -20,4 +28,13 @@ export default class UsersController {
     const users = this.usersService.getAll();
     return resp.status(200).json(users);
   }
+
+  @httpGet('/:id')
+  public getById(
+    @response() resp: Response<UserDto>,
+    @requestParam('id') id: string,
+  ): Response<UserDto> {
+    const user = this.usersService.getById(id);
+    return resp.status(200).json(user);
+  };
 }

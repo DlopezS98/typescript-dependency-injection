@@ -9,6 +9,7 @@ addAliases({
     '@Controllers': join(__dirname, 'controllers'),
     '@Services': join(__dirname, 'core', 'services'),
     '@Repositories': join(__dirname, 'core', 'repositories'),
+    '@Interfaces': join(__dirname, 'core', 'interfaces'),
     '@Routes': join(__dirname, 'routes'),
     '@Shared': join(__dirname, 'shared')
 });
