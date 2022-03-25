@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
 import 'reflect-metadata';
 import { Container } from 'inversify';
+import { getRouteInfo, RouteInfo } from 'inversify-express-utils';
+import prettyjson from 'prettyjson';
 
 import './paths';
 import Environment from '@Config/environment';
@@ -20,8 +23,12 @@ export default class Startup {
   public async initialize(): Promise<{ success: boolean; message: string }> {
     try {
       const app = this.application.initialize();
+      const routes: RouteInfo[] = getRouteInfo(this.container);
       const message = `Server listening on port: ${app.get('port')}`;
       await app.listen(app.get('port'));
+
+      console.log(prettyjson.render({ routes }));
+      
       return { success: true, message };
     } catch (error: any) {
       return { success: false, message: error };
@@ -29,7 +36,6 @@ export default class Startup {
   }
 }
 
-new Startup().initialize().then(resp => {
-  // eslint-disable-next-line no-console
+new Startup().initialize().then((resp) => {
   console.info('info: ', resp);
 });

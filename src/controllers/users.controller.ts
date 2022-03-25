@@ -7,16 +7,17 @@ import {
 
 import UserDto from '@Shared/Dtos/responses/users.dto';
 import { Response, Request } from 'express';
-// import UsersService from '@Services/users.service';
 import IUsersService from '@Interfaces/services/iusers.service';
 import { inject } from 'inversify';
 import KeysMapping from '@Interfaces/interfaces.mapping';
+import BaseController from './base.controller';
 
 @controller('/users')
-export default class UsersController {
+export default class UsersController extends BaseController {
   private readonly usersService: IUsersService;
 
   constructor(@inject(KeysMapping.IUsersService) usersService: IUsersService) {
+    super();
     this.usersService = usersService;
   }
 
