@@ -28,6 +28,7 @@ export default class Startup {
       await app.listen(app.get('port'));
 
       console.log(prettyjson.render({ routes }));
+      console.log(`environment: ${app.get('env')}`);
       
       return { success: true, message };
     } catch (error: any) {

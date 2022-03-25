@@ -11,11 +11,12 @@
         "prettier",
         "eslint-config-prettier"
     ],
+    "ignorePatterns": "*.js",
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "tsconfig.eslintrc.json"
     },
     "plugins": [
         "@typescript-eslint",
@@ -25,7 +26,9 @@
         "import/no-unresolved": 0,
         "class-methods-use-this": 0,
         "@typescript-eslint/no-empty-interface": "error",
-        "@typescript-eslint/semi": ["error"],
+        "@typescript-eslint/semi": [
+            "error"
+        ],
         "no-console": [
             "error"
         ],
@@ -98,6 +101,17 @@
         "lines-between-class-members": "off",
         "@typescript-eslint/lines-between-class-members": "off",
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"]
-    }
+        "@typescript-eslint/no-use-before-define": [
+            "error"
+        ]
+    },
+    "overrides": [
+        {
+            "files": "specs/**/*ts",
+            "env": {
+                "jest": true,
+                "node": true
+            }
+        }
+    ]
 }
