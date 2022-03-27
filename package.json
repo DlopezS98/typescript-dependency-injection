@@ -8,8 +8,8 @@
     "start": "cross-env NODE_ENV=production node dist/src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "dev:debug": "nodemon --inspect src/index.ts",
-    "cp:env-files": "cp ./src/config/*.env ./dist/src/config/",
-    "build": "tsc && tsc-alias && npm run cp:env-files",
+    "build:win32": "tsc && tsc-alias && copy ./src/config/*.env ./dist/src/config/",
+    "build": "tsc && tsc-alias && cp ./src/config/*.env ./dist/src/config/",
     "set:prod": "export NODE_ENV= || set NODE_ENV=test"
   },
   "repository": {

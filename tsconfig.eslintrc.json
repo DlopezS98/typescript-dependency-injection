@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": ["jest"]
   },
-  "include": ["src", "specs"]
+  "include": ["src/**/*", "specs/**/*"]
 }

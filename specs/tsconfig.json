@@ -11,5 +11,6 @@
     "rootDir": "..",
     "noEmit": false
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

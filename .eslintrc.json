@@ -107,10 +107,13 @@
     },
     "overrides": [
         {
-            "files": "specs/**/*ts",
+            "files": ["*.spec.ts", "*.test.ts"],
             "env": {
                 "jest": true,
                 "node": true
+            },
+            "parserOptions": {
+                "project": "specs/tsconfig.json"
             }
         }
     ]
