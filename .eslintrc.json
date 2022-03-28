@@ -26,6 +26,15 @@
         "import/no-unresolved": 0,
         "class-methods-use-this": 0,
         "@typescript-eslint/no-empty-interface": "error",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "**/*.test.ts",
+                    "**/*.spec.ts"
+                ]
+            }
+        ],
         "@typescript-eslint/semi": [
             "error"
         ],
@@ -107,7 +116,10 @@
     },
     "overrides": [
         {
-            "files": ["*.spec.ts", "*.test.ts"],
+            "files": [
+                "*.spec.ts",
+                "*.test.ts"
+            ],
             "env": {
                 "jest": true,
                 "node": true
