@@ -4,6 +4,7 @@ import { join } from 'path';
 
 
 addAliases({
+    '@Src': __dirname,
     '@Database': join(__dirname, 'core', 'database'),
     '@Config': join(__dirname, 'config'),
     '@Controllers': join(__dirname, 'controllers'),

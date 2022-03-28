@@ -1,14 +1,17 @@
 import Users from '@Database/models/users.model';
+import UserResDto from '@Shared/Dtos/responses/users.dto';
+
+export const userModel: Users = {
+  id: '1200012',
+  firstname: 'Danny',
+  lastname: 'Lopez',
+  username: 'DlopezS98',
+  password: '***Gen3ricP@ssword***',
+  created_at: new Date('2022-03-25T21:25:00.227Z'),
+};
 
 const usersModel: Users[] = [
-  {
-    id: '1200012',
-    firstname: 'Danny',
-    lastname: 'Lopez',
-    username: 'DlopezS98',
-    password: '***Gen3ricP@ssword***',
-    created_at: new Date('2022-03-25T21:25:00.227Z'),
-  },
+  { ...userModel },
   {
     id: '1288120',
     firstname: 'Aldahir',
@@ -18,5 +21,13 @@ const usersModel: Users[] = [
     created_at: new Date('2022-03-25T21:25:00.227Z'),
   },
 ];
+
+export const userDtoResp: UserResDto = {
+  id: userModel.id,
+  username: userModel.username,
+  fullname: `${userModel.firstname} ${userModel.lastname}`,
+  createdAt: userModel.created_at,
+  updatedAt: userModel.updated_at,
+};
 
 export default usersModel;

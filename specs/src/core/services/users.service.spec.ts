@@ -3,7 +3,7 @@ import UsersService from '@Services/users.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import Users from '@Database/models/users.model';
 import UserDto from '@Shared/Dtos/responses/users.dto';
-import usersModelMock from '../../mocks/users.mock';
+import usersModelMock, { userDtoResp } from '@Mocks/users.mock';
 
 let usersService: UsersService;
 let userRepository: IUsersRepository;
@@ -33,17 +33,7 @@ describe('(method): getAll - should return a list of users', () => {
   });
 
   it('users should be an array of user dtos', () => {
-    const firstUser = usersModelMock[0];
-    const fullname = `${firstUser.firstname} ${firstUser.lastname}`;
-    const mockedUser: UserDto = {
-      id: firstUser.id,
-      username: firstUser.username,
-      createdAt: firstUser.created_at,
-      fullname,
-      updatedAt: firstUser.updated_at,
-    };
-
-    expect(users).toContainEqual<UserDto>(mockedUser);
+    expect(users).toContainEqual<UserDto>(userDtoResp);
     users.forEach((user) => {
       expect(user).toHaveProperty<UserDto>('fullname');
       expect(user).not.toHaveProperty<UserDto>('firstname');
@@ -54,9 +44,10 @@ describe('(method): getAll - should return a list of users', () => {
 
 describe('(method): getById - should return a single user', () => {
   it('return a single user', () => {
-    const user1 = usersService.getById('1200012');
+    const user1 = usersService.getById(userDtoResp.id);
     const user2 = usersService.getById('1288120');
-    expect(user1?.username).toEqual('DlopezS98');
+    expect(user1?.username).toEqual(userDtoResp.username);
     expect(user2?.username).toEqual('01DlopezS98');
+    expect(usersService.getById('0000')).toBeUndefined();
   });
 });
