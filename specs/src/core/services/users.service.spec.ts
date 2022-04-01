@@ -1,22 +1,23 @@
 import 'reflect-metadata';
 import UsersService from '@Services/users.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
-import Users from '@Database/models/users.model';
-import UserDto from '@Shared/Dtos/responses/users.dto';
 import usersModelMock, { userDtoResp } from '@Mocks/users.mock';
+import IUsers from '@Database/models/users.model';
+import UserRespDto from '@Shared/Dtos/responses/users.dto';
 
 let usersService: UsersService;
 let userRepository: IUsersRepository;
-let users: UserDto[];
+let users: UserRespDto[];
 
 beforeAll(() => {
-  const Mock = jest.fn<IUsersRepository, Users[]>(() => ({
+  const Mock = jest.fn<IUsersRepository, IUsers[]>(() => ({
     getAll: jest.fn().mockReturnValue(usersModelMock),
     getById: jest
       .fn()
       .mockImplementation((id: string) =>
         usersModelMock.find((user) => user.id === id)
       ),
+    create: jest.fn().mockReturnValue(usersModelMock[0])
   }));
 
   userRepository = new Mock();
@@ -33,11 +34,11 @@ describe('(method): getAll - should return a list of users', () => {
   });
 
   it('users should be an array of user dtos', () => {
-    expect(users).toContainEqual<UserDto>(userDtoResp);
+    expect(users).toContainEqual<UserRespDto>(userDtoResp);
     users.forEach((user) => {
-      expect(user).toHaveProperty<UserDto>('fullname');
-      expect(user).not.toHaveProperty<UserDto>('firstname');
-      expect(user).not.toHaveProperty<UserDto>('lastname');
+      expect(user).toHaveProperty<UserRespDto>('fullname');
+      expect(user).not.toHaveProperty<UserRespDto>('firstname');
+      expect(user).not.toHaveProperty<UserRespDto>('lastname');
     });
   });
 });

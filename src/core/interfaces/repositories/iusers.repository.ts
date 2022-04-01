@@ -1,6 +1,7 @@
-import Users from '@Database/models/users.model';
+import IUsers from '@Database/models/users.model';
 
 export default interface IUsersRepository {
-  getAll: () => Users[];
-  getById: (id: string) => Users | undefined;
+  create(user: IUsers): IUsers;
+  getAll(): IUsers[];
+  getById: (id: string) => IUsers | undefined;
 }

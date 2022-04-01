@@ -1,12 +1,12 @@
 import { injectable } from 'inversify';
 
 import DatabaseContext from '@Database/database.context';
-import Users from '@Database/models/users.model';
+import IUsers from '@Database/models/users.model';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 
 @injectable()
 export default class UsersRepository implements IUsersRepository {
-  private readonly users: Array<Users>;
+  private readonly users: Array<IUsers>;
   constructor(private readonly dbContext: DatabaseContext) {
     this.users = [
       {
@@ -27,12 +27,27 @@ export default class UsersRepository implements IUsersRepository {
       },
     ];
   }
+  
+  create(user: IUsers): IUsers {
+    const exists = this.users.some(userDb => this.userExists(userDb, user));
+    if (exists) throw new Error('The username already exists!');
+    
+    this.users.push(user);
+    return user;
+  }
 
-  getAll(): Array<Users> {
+  private userExists(userFromDb: IUsers, newUser: IUsers): boolean {
+    const { username: usernameDb } = userFromDb;
+    const { username: newUsername } = newUser;
+
+    return usernameDb === newUsername;
+  }
+
+  getAll(): Array<IUsers> {
     return this.users;
   }
 
-  getById(id: string): Users | undefined {
+  getById(id: string): IUsers | undefined {
     return this.users.find(user => user.id === id);
   };
 }

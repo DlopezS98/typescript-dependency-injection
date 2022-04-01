@@ -10,7 +10,8 @@
     "dev:debug": "nodemon --inspect src/index.ts",
     "build:win32": "tsc && tsc-alias && copy ./src/config/*.env ./dist/src/config/",
     "build": "tsc && tsc-alias && cp ./src/config/*.env ./dist/src/config/",
-    "set:prod": "export NODE_ENV= || set NODE_ENV=test"
+    "set:prod": "export NODE_ENV= || set NODE_ENV=test",
+    "tsc:checker": "tsc --noEmit && eslint"
   },
   "repository": {
     "type": "git",
