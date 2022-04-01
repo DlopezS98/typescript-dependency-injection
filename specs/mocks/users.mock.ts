@@ -1,5 +1,5 @@
 import Users from '@Database/models/users.model';
-import UserResDto from '@Shared/Dtos/responses/users.dto';
+import UserResDto from '@Shared/dtos/responses/users.dto';
 
 export const userModel: Users = {
   id: '1200012',

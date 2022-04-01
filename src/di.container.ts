@@ -11,14 +11,18 @@ export default class DIContainer {
   private readonly container: Container;
   constructor() {
     this.container = new Container({
-      defaultScope: 'Singleton'
+      defaultScope: 'Singleton',
     });
   }
 
   public initialize(): Container {
     this.container.bind(DatabaseContext).toSelf();
-    this.container.bind<IUsersRepository>(KeysMapping.IUsersRepository).to(UsersRepository);
-    this.container.bind<IUsersService>(KeysMapping.IUsersService).to(UsersService);
+    this.container
+      .bind<IUsersRepository>(KeysMapping.IUsersRepository)
+      .to(UsersRepository);
+    this.container
+      .bind<IUsersService>(KeysMapping.IUsersService)
+      .to(UsersService);
     return this.container;
   }
 }

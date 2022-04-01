@@ -29,7 +29,7 @@ export default class Startup {
 
       console.log(prettyjson.render({ routes }));
       console.log(`environment: ${app.get('env')}`);
-      
+
       return { success: true, message };
     } catch (error: any) {
       return { success: false, message: error };

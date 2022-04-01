@@ -7,13 +7,13 @@ import {
   response,
 } from 'inversify-express-utils';
 
-import UserRespDto from '@Shared/Dtos/responses/users.dto';
+import UserRespDto from '@Shared/dtos/responses/users.dto';
 import { Response, Request } from 'express';
 import IUsersService from '@Interfaces/services/iusers.service';
 import { inject } from 'inversify';
 import KeysMapping from '@Interfaces/interfaces.mapping';
-import { Success } from '@Shared/Dtos/responses/http.response';
-import UserReqDto from '@Shared/Dtos/requests/users.dto';
+import { Success } from '@Shared/dtos/responses/http.response';
+import UserReqDto from '@Shared/dtos/requests/users.dto';
 import StatusCodes from '@Shared/types/http-status-codes';
 import BaseController from './base.controller';
 

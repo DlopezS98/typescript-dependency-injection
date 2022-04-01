@@ -1,5 +1,5 @@
 import Users from '@Database/models/users.model';
-import UserRespDto from '../Dtos/responses/users.dto';
+import UserRespDto from '../dtos/responses/users.dto';
 import typeGuard from './common';
 
 export function isUserResponseDto(user: unknown): user is UserRespDto {

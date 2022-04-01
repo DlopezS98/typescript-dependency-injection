@@ -3,7 +3,7 @@ import UsersService from '@Services/users.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import usersModelMock, { userDtoResp } from '@Mocks/users.mock';
 import IUsers from '@Database/models/users.model';
-import UserRespDto from '@Shared/Dtos/responses/users.dto';
+import UserRespDto from '@Shared/dtos/responses/users.dto';
 
 let usersService: UsersService;
 let userRepository: IUsersRepository;
