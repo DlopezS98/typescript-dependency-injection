@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { controller, httpGet } from 'inversify-express-utils';
+
 import BaseController from './base.controller';
 
 @controller('/')

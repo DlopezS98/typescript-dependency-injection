@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 
 import IUsers, { Users } from '@Database/models/users.model';
-// import UsersRepository from '@Repositories/users.repository';
 import UserRespDto from '@Shared/dtos/responses/users.dto';
 import IUsersService from '@Interfaces/services/iusers.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';

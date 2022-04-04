@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
+
 import { customObjectGuard, errorGuard } from '@Shared/guards/common';
 import HttpException from '@Shared/models/http-error-exception';
 import { ErrorResponse } from '@Shared/models/http.response';
-import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 import { HttpResponse } from '@Shared/types/common.cd';
 import StatusCodes from '@Shared/types/http-status-codes';
 

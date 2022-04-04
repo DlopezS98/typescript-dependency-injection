@@ -6,11 +6,11 @@ import {
   requestParam,
   response,
 } from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { Response, Request } from 'express';
 
 import UserRespDto from '@Shared/dtos/responses/users.dto';
-import { Response, Request } from 'express';
 import IUsersService from '@Interfaces/services/iusers.service';
-import { inject } from 'inversify';
 import KeysMapping from '@Interfaces/interfaces.mapping';
 import { SuccessResponse } from '@Shared/models/http.response';
 import UserReqDto from '@Shared/dtos/requests/users.dto';
