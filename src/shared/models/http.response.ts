@@ -1,17 +1,9 @@
 /* eslint-disable max-classes-per-file */
 
 import HttpStatusCodes from '@Shared/types/http-status-codes';
+import { HttpRequestOptions, HttpResponse } from '@Shared/types/common.cd';
 
-export interface HttpResponse<T> {
-  statusCode: HttpStatusCodes;
-  message: string;
-  success: boolean;
-  data?: T;
-}
-
-export type HttpRequestOptions<T> = Partial<Omit<HttpResponse<T>, 'success'>>;
-
-export class Success<T = Record<string, unknown>> implements HttpResponse<T> {
+export class SuccessResponse<T = Record<string, unknown>> implements HttpResponse<T> {
   statusCode: HttpStatusCodes;
   message = 'Request made successfully!';
   success = true;
@@ -25,9 +17,9 @@ export class Success<T = Record<string, unknown>> implements HttpResponse<T> {
   }
 }
 
-export class Error<T = Record<string, unknown>> implements HttpResponse<T> {
+export class ErrorResponse<T = Record<string, unknown>> implements HttpResponse<T> {
   statusCode: HttpStatusCodes;
-  message = 'There was an error trying to complete the request!';
+  message = 'Unexpected internal server error!';
   success = false;
   data?: T;
 

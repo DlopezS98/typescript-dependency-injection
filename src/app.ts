@@ -6,6 +6,7 @@ import { Container } from 'inversify';
 
 import Environment from '@Config/environment';
 import pkg from '../package.json';
+import ErrorMiddlewareHandler from './middlewares/global-error-handler';
 
 // controllers
 import '@Controllers/controllers.mapping';
@@ -32,6 +33,11 @@ export default class Application {
       app.use(cors());
       app.use(urlencoded({ extended: false }));
       app.use(json());
+    });
+
+    this.server.setErrorConfig((app) => {
+      // Global error handling
+      app.use(ErrorMiddlewareHandler);
     });
 
     return this.server.build();

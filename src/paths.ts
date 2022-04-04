@@ -12,5 +12,6 @@ addAliases({
     '@Repositories': join(__dirname, 'core', 'repositories'),
     '@Interfaces': join(__dirname, 'core', 'interfaces'),
     '@Routes': join(__dirname, 'routes'),
-    '@Shared': join(__dirname, 'shared')
+    '@Shared': join(__dirname, 'shared'),
+    '@Middlewares': join(__dirname, 'middlewares')
 });

@@ -3,6 +3,8 @@ import { injectable } from 'inversify';
 import DatabaseContext from '@Database/database.context';
 import IUsers from '@Database/models/users.model';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
+import HttpStatusCodes from '@Shared/types/http-status-codes';
+import HttpException from '@Shared/models/http-error-exception';
 
 @injectable()
 export default class UsersRepository implements IUsersRepository {
@@ -27,11 +29,16 @@ export default class UsersRepository implements IUsersRepository {
       },
     ];
   }
-  
+
   create(user: IUsers): IUsers {
-    const exists = this.users.some(userDb => this.userExists(userDb, user));
-    if (exists) throw new Error('The username already exists!');
-    
+    const exists = this.users.some((userDb) => this.userExists(userDb, user));
+    if (exists)
+      throw new HttpException({
+        message: 'The username already exists!',
+        data: { username: user.username },
+        statusCode: HttpStatusCodes.BadRequest
+      });
+
     this.users.push(user);
     return user;
   }
@@ -48,6 +55,6 @@ export default class UsersRepository implements IUsersRepository {
   }
 
   getById(id: string): IUsers | undefined {
-    return this.users.find(user => user.id === id);
-  };
+    return this.users.find((user) => user.id === id);
+  }
 }

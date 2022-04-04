@@ -38,6 +38,7 @@
       "@Routes/*": ["src/routes/*"],
       "@Shared/*": ["src/shared/*"],
       "@Config/*": ["src/config/*"],
+      "@Middlewares/*": ["src/middlewares/*"],
       // only for testing purpose...
       "@Specs/*": ["specs/*"],
       "@Mocks/*": ["specs/mocks/*"]

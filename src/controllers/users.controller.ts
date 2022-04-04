@@ -12,9 +12,10 @@ import { Response, Request } from 'express';
 import IUsersService from '@Interfaces/services/iusers.service';
 import { inject } from 'inversify';
 import KeysMapping from '@Interfaces/interfaces.mapping';
-import { Success } from '@Shared/dtos/responses/http.response';
+import { SuccessResponse } from '@Shared/models/http.response';
 import UserReqDto from '@Shared/dtos/requests/users.dto';
 import StatusCodes from '@Shared/types/http-status-codes';
+import { HttpResponse } from '@Shared/types/common.cd';
 import BaseController from './base.controller';
 
 @controller('/users')
@@ -47,10 +48,10 @@ export default class UsersController extends BaseController {
   @httpPost('/')
   public create(
     @requestBody() user: UserReqDto,
-    @response() resp: Response<Success<UserRespDto>>
-  ): Response<Success<UserRespDto>> {
+    @response() resp: Response<HttpResponse<UserRespDto>>
+  ): Response<HttpResponse<UserRespDto>> {
     const userResponse = this.usersService.create(user);
-    const successResponse = new Success<UserRespDto>({
+    const successResponse = new SuccessResponse<UserRespDto>({
       data: userResponse,
       message: 'User created successfully!',
       statusCode: StatusCodes.Ok,
