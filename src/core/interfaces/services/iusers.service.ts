@@ -1,5 +1,7 @@
-import usersReqDto from '@Shared/dtos/requests/users.dto';
-import UserRespDto from '@Shared/dtos/responses/users.dto';
+import {
+  UserRequestDto as usersReqDto,
+  UserResponseDto as UserRespDto,
+} from '@Shared/dtos/users.dto';
 
 export default interface IUsersService {
   create(user: usersReqDto): UserRespDto;

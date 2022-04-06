@@ -9,11 +9,13 @@ import {
 import { inject } from 'inversify';
 import { Response, Request } from 'express';
 
-import UserRespDto from '@Shared/dtos/responses/users.dto';
+import {
+  UserResponseDto as UserRespDto,
+  UserRequestDto as UserReqDto,
+} from '@Shared/dtos/users.dto';
 import IUsersService from '@Interfaces/services/iusers.service';
 import KeysMapping from '@Interfaces/interfaces.mapping';
 import { SuccessResponse } from '@Shared/models/http.response';
-import UserReqDto from '@Shared/dtos/requests/users.dto';
 import StatusCodes from '@Shared/types/http-status-codes';
 import { HttpResponse } from '@Shared/types/common.cd';
 import BaseController from './base.controller';

@@ -1,11 +1,13 @@
 import { inject, injectable } from 'inversify';
 
 import IUsers, { Users } from '@Database/models/users.model';
-import UserRespDto from '@Shared/dtos/responses/users.dto';
+import {
+  UserRequestDto as UsersReqDto,
+  UserResponseDto as UserRespDto,
+} from '@Shared/dtos/users.dto';
 import IUsersService from '@Interfaces/services/iusers.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import KeysMapping from '@Interfaces/interfaces.mapping';
-import UsersReqDto from '@Shared/dtos/requests/users.dto';
 
 @injectable()
 export default class UsersService implements IUsersService {
