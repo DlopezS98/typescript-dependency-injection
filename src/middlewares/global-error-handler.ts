@@ -3,7 +3,7 @@
 
 import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 
-import { customObjectGuard, errorGuard } from '@Shared/guards/common';
+import { customObjectGuard, errorGuard } from '@Src/shared/guards/common.guard';
 import HttpException from '@Shared/models/http-error-exception';
 import { ErrorResponse } from '@Shared/models/http.response';
 import { HttpResponse } from '@Shared/types/common.cd';

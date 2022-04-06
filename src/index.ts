@@ -1,12 +1,15 @@
+/* eslint-disable import/order */
 /* eslint-disable no-console */
-import 'reflect-metadata';
+/* Paths & container must be at the beginning to load
+  the relative paths & metadata for inversify */
+import './paths';
+import DIContainer from './di.container';
+
 import { Container } from 'inversify';
 import { getRouteInfo, RouteInfo } from 'inversify-express-utils';
 import prettyjson from 'prettyjson';
 
-import './paths';
 import Environment from '@Config/environment';
-import DIContainer from './di.container';
 import Application from './app';
 
 export default class Startup {

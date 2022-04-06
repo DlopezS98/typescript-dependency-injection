@@ -1,6 +1,6 @@
 import Users from '@Database/models/users.model';
 import UserRespDto from '../dtos/responses/users.dto';
-import typeGuard from './common';
+import typeGuard from './common.guard';
 
 export function isUserResponseDto(user: unknown): user is UserRespDto {
   const isObject = typeGuard<'object'>(user, 'object');

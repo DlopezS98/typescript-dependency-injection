@@ -5,8 +5,8 @@ import morgan from 'morgan';
 import { Container } from 'inversify';
 
 import Environment from '@Config/environment';
+import ErrorMiddlewareHandler from '@Middlewares/global-error-handler';
 import pkg from '../package.json';
-import ErrorMiddlewareHandler from './middlewares/global-error-handler';
 
 // controllers
 import '@Controllers/controllers.mapping';
