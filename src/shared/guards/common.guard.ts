@@ -9,7 +9,7 @@ export default function typeGuard<T extends Sentinel>(
 
 export const errorGuard = (error: unknown): error is Error => {
   const isObject = typeGuard<'object'>(error, 'object');
-  return isObject ? 'message' in error : false;
+  return isObject ? 'message' in error && 'stack' in error : false;
 };
 
 export const customObjectGuard = <T>(

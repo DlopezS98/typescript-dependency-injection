@@ -14,7 +14,7 @@ import {
   UserRequestDto as UserReqDto,
 } from '@Shared/dtos/users.dto';
 import IUsersService from '@Interfaces/services/iusers.service';
-import KeysMapping from '@Interfaces/interfaces.mapping';
+import Interfaces from '@Interfaces/interfaces.mapping';
 import { SuccessResponse } from '@Shared/models/http.response';
 import StatusCodes from '@Shared/types/http-status-codes';
 import { HttpResponse } from '@Shared/types/common.cd';
@@ -24,7 +24,7 @@ import BaseController from './base.controller';
 export default class UsersController extends BaseController {
   private readonly usersService: IUsersService;
 
-  constructor(@inject(KeysMapping.IUsersService) usersService: IUsersService) {
+  constructor(@inject(Interfaces.UsersService) usersService: IUsersService) {
     super();
     this.usersService = usersService;
   }

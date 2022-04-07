@@ -8,19 +8,20 @@ import {
   response,
 } from 'inversify-express-utils';
 
-import KeysMapping from '@Interfaces/interfaces.mapping';
+import Interfaces from '@Interfaces/interfaces.mapping';
 import StatusCodes from '@Shared/types/http-status-codes';
 import ProductsService from '@Services/products.service';
 import ProductResponseDto, {
   ProductRequestDto,
 } from '@Shared/dtos/products.dto';
 import { SuccessResponse } from '@Shared/models/http.response';
+import Middlewares from '@Middlewares/middlewares.mapping';
 import BaseController from './base.controller';
 
-@controller('/products')
+@controller('/products', Middlewares.JwtAuth)
 export default class ProductsController extends BaseController {
   constructor(
-    @inject(KeysMapping.IProductsService)
+    @inject(Interfaces.ProductsService)
     private productsService: ProductsService
   ) {
     super();

@@ -7,13 +7,13 @@ import {
 } from '@Shared/dtos/users.dto';
 import IUsersService from '@Interfaces/services/iusers.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
-import KeysMapping from '@Interfaces/interfaces.mapping';
+import Interfaces from '@Interfaces/interfaces.mapping';
 
 @injectable()
 export default class UsersService implements IUsersService {
   private readonly usersRepository: IUsersRepository;
   constructor(
-    @inject(KeysMapping.IUsersRepository) usersRepository: IUsersRepository
+    @inject(Interfaces.UsersRepository) usersRepository: IUsersRepository
   ) {
     this.usersRepository = usersRepository;
   }

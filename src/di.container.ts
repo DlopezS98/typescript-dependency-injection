@@ -2,7 +2,8 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 
 import DatabaseContext from '@Database/database.context';
-import KeysMapping from '@Interfaces/interfaces.mapping';
+import Interfaces from '@Interfaces/interfaces.mapping';
+import Middlewares from '@Middlewares/middlewares.mapping';
 
 // users...
 import UsersRepository from '@Repositories/users.repository';
@@ -15,6 +16,7 @@ import IProductsService from '@Interfaces/services/iproducts.service';
 import ProductsService from '@Services/products.service';
 import IProductsRespository from '@Interfaces/repositories/iproducts.repository';
 import ProductsRepository from '@Repositories/products.repository';
+import JwtAuthMiddleware from './middlewares/jwt-authentication';
 
 export default class DIContainer {
   private readonly container: Container;
@@ -27,17 +29,22 @@ export default class DIContainer {
   public initialize(): Container {
     this.container.bind(DatabaseContext).toSelf();
     this.container
-      .bind<IUsersRepository>(KeysMapping.IUsersRepository)
+      .bind<IUsersRepository>(Interfaces.UsersRepository)
       .to(UsersRepository);
     this.container
-      .bind<IUsersService>(KeysMapping.IUsersService)
+      .bind<IUsersService>(Interfaces.UsersService)
       .to(UsersService);
     this.container
-      .bind<IProductsService>(KeysMapping.IProductsService)
+      .bind<IProductsService>(Interfaces.ProductsService)
       .to(ProductsService);
     this.container
-      .bind<IProductsRespository>(KeysMapping.IProductsRepository)
+      .bind<IProductsRespository>(Interfaces.ProductsRepository)
       .to(ProductsRepository);
+
+    // Middlewares...
+    this.container
+      .bind<JwtAuthMiddleware>(Middlewares.JwtAuth)
+      .to(JwtAuthMiddleware);
     return this.container;
   }
 }

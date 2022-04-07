@@ -4,7 +4,7 @@ import ProductRespDto, {
   ProductRequestDto as ProductReqDto,
 } from '@Src/shared/dtos/products.dto';
 import IProductsService from '@Interfaces/services/iproducts.service';
-import KeysMapping from '@Interfaces/interfaces.mapping';
+import Interfaces from '@Interfaces/interfaces.mapping';
 import IProductsRepository from '@Interfaces/repositories/iproducts.repository';
 import IProducts from '@Database/models/products.model';
 
@@ -12,7 +12,7 @@ import IProducts from '@Database/models/products.model';
 export default class ProductsService implements IProductsService {
   private readonly productsRepository: IProductsRepository;
   constructor(
-    @inject(KeysMapping.IProductsRepository)
+    @inject(Interfaces.ProductsRepository)
     productsRepository: IProductsRepository
   ) {
     this.productsRepository = productsRepository;
