@@ -4,7 +4,9 @@ import DatabaseContext from '@Database/database.context';
 import IUsers from '@Database/models/users.model';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import HttpStatusCodes from '@Shared/types/http-status-codes';
-import HttpException from '@Shared/models/http-error-exception';
+import HttpException from '@Shared/models/http-error-exceptions';
+import { ObjectKeys } from '@Src/shared/types/common.cd';
+import Regexp from '@Shared/constants/regexp';
 
 @injectable()
 export default class UsersRepository implements IUsersRepository {
@@ -16,6 +18,8 @@ export default class UsersRepository implements IUsersRepository {
         firstname: 'Danny',
         lastname: 'Lopez',
         username: 'DlopezS98',
+        email: '01dlopezs98@gmail.com',
+        roles: ['Admin'],
         password: 'Gen3ricP@ssword',
         created_at: new Date(),
       },
@@ -24,6 +28,8 @@ export default class UsersRepository implements IUsersRepository {
         firstname: 'Aldahir',
         lastname: 'Sanchez',
         username: 'DlopezS98',
+        roles: ['Guest'],
+        email: 'lopezsanchezdannyaldahir@gmail.com',
         password: 'Gen3ricP@ssword',
         created_at: new Date(),
       },
@@ -31,23 +37,31 @@ export default class UsersRepository implements IUsersRepository {
   }
 
   create(user: IUsers): IUsers {
-    const exists = this.users.some((userDb) => this.userExists(userDb, user));
+    const [exists, message] = this.userExists(user);
     if (exists)
       throw new HttpException({
-        message: 'The username already exists!',
-        data: { username: user.username },
-        statusCode: HttpStatusCodes.BadRequest
+        message,
+        data: { username: user.username, email: user.email },
+        statusCode: HttpStatusCodes.BadRequest,
       });
 
     this.users.push(user);
     return user;
   }
 
-  private userExists(userFromDb: IUsers, newUser: IUsers): boolean {
-    const { username: usernameDb } = userFromDb;
-    const { username: newUsername } = newUser;
+  private userExists(user: IUsers): [boolean, string] {
+    const { username, email } = user;
+    const usernameExists = this.users.some(
+      (userDb) => userDb.username.toUpperCase() === username.toUpperCase()
+    );
+    if (usernameExists) return [true, 'The username already exists!'];
 
-    return usernameDb === newUsername;
+    const emailExists = this.users.some(
+      (userDb) => userDb.email.toUpperCase() === email.toUpperCase()
+    );
+    if (emailExists) return [true, 'The email already exists'];
+
+    return [false, 'The user doesn\'t exists'];
   }
 
   getAll(): Array<IUsers> {
@@ -56,5 +70,13 @@ export default class UsersRepository implements IUsersRepository {
 
   getById(id: string): IUsers | undefined {
     return this.users.find((user) => user.id === id);
+  }
+
+  getByUsernameOrEmail(user: string): IUsers | undefined {
+    const isEmail = new Regexp(user).isEmail();
+    const key: ObjectKeys<IUsers> = isEmail ? 'email' : 'username';
+    return this.users.find(
+      (_user) => _user[key].toUpperCase().trim() === user.toUpperCase().trim()
+    );
   }
 }

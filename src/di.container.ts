@@ -16,7 +16,11 @@ import IProductsService from '@Interfaces/services/iproducts.service';
 import ProductsService from '@Services/products.service';
 import IProductsRespository from '@Interfaces/repositories/iproducts.repository';
 import ProductsRepository from '@Repositories/products.repository';
-import JwtAuthMiddleware from './middlewares/jwt-authentication';
+
+// Security
+import JwtAuthMiddleware from '@Middlewares/jwt-authentication';
+import IAuthService from '@Interfaces/services/iauth.service';
+import AuthService from '@Services/auth.service';
 
 export default class DIContainer {
   private readonly container: Container;
@@ -40,6 +44,9 @@ export default class DIContainer {
     this.container
       .bind<IProductsRespository>(Interfaces.ProductsRepository)
       .to(ProductsRepository);
+    this.container
+      .bind<IAuthService>(Interfaces.AuthService)
+      .to(AuthService);
 
     // Middlewares...
     this.container

@@ -8,6 +8,8 @@ import {
 import IUsersService from '@Interfaces/services/iusers.service';
 import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import Interfaces from '@Interfaces/interfaces.mapping';
+import HttpException from '@Shared/models/http-error-exceptions';
+import StatusCodes from '@Shared/types/http-status-codes';
 
 @injectable()
 export default class UsersService implements IUsersService {
@@ -28,9 +30,26 @@ export default class UsersService implements IUsersService {
     return users.map((user) => this.mapUserDto(user));
   }
 
-  getById(id: string): UserRespDto | undefined {
-    const users = this.usersRepository.getById(id);
-    return users ? this.mapUserDto(users) : undefined;
+  getById(id: string): UserRespDto {
+    const user = this.usersRepository.getById(id);
+    if (!user)
+      throw new HttpException({
+        message: 'The user doesn\'t exists!',
+        statusCode: StatusCodes.NotFound,
+      });
+
+    return this.mapUserDto(user);
+  }
+
+  getByUsernameOrEmail(usernameOrEmail: string): UserRespDto {
+    const user = this.usersRepository.getByUsernameOrEmail(usernameOrEmail);
+    if (!user)
+      throw new HttpException({
+        message: 'The user doesn\'t exists!',
+        statusCode: StatusCodes.NotFound,
+      });
+
+    return this.mapUserDto(user);
   }
 
   private mapUserDto(user: IUsers): UserRespDto {
@@ -39,20 +58,24 @@ export default class UsersService implements IUsersService {
       username,
       firstname,
       lastname,
+      email,
+      roles,
       created_at: createdAt,
       updated_at: updatedAt,
     } = user;
     const fullname = `${firstname} ${lastname}`;
-    return { id, username, fullname, createdAt, updatedAt };
+    return { id, username, fullname, email, createdAt, updatedAt, roles };
   }
 
   private mapUserModel(userDto: UsersReqDto): IUsers {
-    const { firstname, lastname, password, username } = userDto;
+    const { firstname, lastname, password, username, email, roles } = userDto;
     const id = this.getId();
     return new Users({
       id,
       firstname,
       lastname,
+      email,
+      roles,
       password,
       username,
       created_at: new Date(),

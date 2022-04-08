@@ -4,4 +4,5 @@ export default interface IUsersRepository {
   create(user: IUsers): IUsers;
   getAll(): IUsers[];
   getById: (id: string) => IUsers | undefined;
+  getByUsernameOrEmail(user: string): IUsers | undefined;
 }

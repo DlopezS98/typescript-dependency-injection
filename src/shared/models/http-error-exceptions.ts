@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { HttpRequestOptions, HttpResponse } from '../types/common.cd';
 import HttpStatusCodes from '../types/http-status-codes';
 
@@ -15,5 +16,23 @@ export default class HttpException<T = Record<string, unknown>> extends Error im
     this.statusCode = statusCode ?? HttpStatusCodes.InternalServerError;
     this.message = message ?? this.message;
     this.data = data;
+  }
+}
+
+export class BadRequestException extends HttpException {
+  constructor(message: string, data?: Record<string, unknown>) {
+    super({ message, data, statusCode: HttpStatusCodes.BadRequest });
+  }
+}
+
+export class NotFoundException extends HttpException {
+  constructor(message: string, data?: Record<string, unknown>) {
+    super({ message, data, statusCode: HttpStatusCodes.NotFound });
+  }
+}
+
+export class UnauthorizedException extends HttpException {
+  constructor(message: string, data?: Record<string, unknown>) {
+    super({ message, data, statusCode: HttpStatusCodes.Unauthorized });
   }
 }

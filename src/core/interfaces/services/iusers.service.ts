@@ -6,5 +6,6 @@ import {
 export default interface IUsersService {
   create(user: usersReqDto): UserRespDto;
   getAll(): UserRespDto[];
-  getById(id: string): UserRespDto | undefined;
+  getById(id: string): UserRespDto;
+  getByUsernameOrEmail(user: string): UserRespDto;
 }

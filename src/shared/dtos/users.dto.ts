@@ -1,13 +1,17 @@
-export interface UserRequestDto {
+interface BaseUserDto {
   username: string;
+  email: string;
+  roles: Array<string>;
+}
+
+export interface UserRequestDto extends BaseUserDto {
   firstname: string;
   lastname: string;
   password: string;
 }
 
-export interface UserResponseDto {
+export interface UserResponseDto extends BaseUserDto {
   id: string;
-  username: string;
   fullname: string;
   createdAt: Date;
   updatedAt?: Date;

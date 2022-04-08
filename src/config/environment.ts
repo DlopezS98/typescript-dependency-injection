@@ -16,4 +16,8 @@ export default class Environment {
   public get JWT_SECRET_KEY(): string {
     return process.env.JWT_SECRET_KEY || '57d2857e-7c96-5caf-985e-47e1b68ba3b9';
   }
+
+  public get JWT_EXPIRES_IN(): string {
+    return process.env.JWT_EXPIRES_IN || '1h';
+  }
 }

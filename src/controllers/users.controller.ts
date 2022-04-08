@@ -18,9 +18,10 @@ import Interfaces from '@Interfaces/interfaces.mapping';
 import { SuccessResponse } from '@Shared/models/http.response';
 import StatusCodes from '@Shared/types/http-status-codes';
 import { HttpResponse } from '@Shared/types/common.cd';
+import Middlewares from '@Middlewares/middlewares.mapping';
 import BaseController from './base.controller';
 
-@controller('/users')
+@controller('/users', Middlewares.JwtAuth)
 export default class UsersController extends BaseController {
   private readonly usersService: IUsersService;
 

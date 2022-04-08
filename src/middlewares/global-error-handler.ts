@@ -4,7 +4,7 @@
 import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 
 import { customObjectGuard, errorGuard } from '@Src/shared/guards/common.guard';
-import HttpException from '@Shared/models/http-error-exception';
+import HttpException from '@Shared/models/http-error-exceptions';
 import { ErrorResponse } from '@Shared/models/http.response';
 import { HttpResponse } from '@Shared/types/common.cd';
 import StatusCodes from '@Shared/types/http-status-codes';

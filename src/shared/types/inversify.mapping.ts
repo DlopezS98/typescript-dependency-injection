@@ -2,7 +2,8 @@ import IUsersRepository from '@Interfaces/repositories/iusers.repository';
 import IUsersService from '@Interfaces/services/iusers.service';
 import IProductsService from '@Interfaces/services/iproducts.service';
 import IProductsRepository from '@Interfaces/repositories/iproducts.repository';
-import JwtAuthMiddleware from '@Src/middlewares/jwt-authentication';
+import IAuthService from '@Interfaces/services/iauth.service';
+import JwtAuthMiddleware from '@Middlewares/jwt-authentication';
 import { ObjectKeys } from './common.cd';
 
 export interface InterfacesIdentifiers {
@@ -10,6 +11,7 @@ export interface InterfacesIdentifiers {
   UsersService: IUsersService;
   ProductsService: IProductsService,
   ProductsRepository: IProductsRepository;
+  AuthService: IAuthService;
 }
 
 export interface MiddlewaresIdentifiers {
