@@ -11,6 +11,7 @@ import prettyjson from 'prettyjson';
 
 import Environment from '@Config/environment';
 import Application from './app';
+import { errorGuard } from '@Shared/guards/common.guard';
 
 export default class Startup {
   private readonly enviroment: Environment;
@@ -34,8 +35,13 @@ export default class Startup {
       console.log(`environment: ${app.get('env')}`);
 
       return { success: true, message };
-    } catch (error: any) {
-      return { success: false, message: error };
+    } catch (error: unknown) {
+      return {
+        success: false,
+        message: errorGuard(error)
+          ? error.message
+          : 'Unexpected error while trying to connect with the server...',
+      };
     }
   }
 }
