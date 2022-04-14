@@ -27,7 +27,7 @@ export default class UsersRepository implements IUsersRepository {
         id: '1288120',
         firstname: 'Aldahir',
         lastname: 'Sanchez',
-        username: 'DlopezS98',
+        username: '01DlopezS98',
         roles: ['Guest'],
         email: 'lopezsanchezdannyaldahir@gmail.com',
         password: 'Gen3ricP@ssword',

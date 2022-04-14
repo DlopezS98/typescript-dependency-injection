@@ -1,3 +1,4 @@
+import JwtPayload from '../models/jwt.payload';
 
 export interface Locals {
   settings: Settings;
@@ -7,6 +8,7 @@ export interface Settings {
   pkg: PackageJson;
   port: number;
   env: string;
+  user?: JwtPayload
 }
 
 export type SettingsKeys = keyof Settings;

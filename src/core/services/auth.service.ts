@@ -64,8 +64,8 @@ export default class AuthService implements IAuthService {
   }
 
   getJwtPayload(user: UserResponseDto): JwtPayload {
-    const { id, username, fullname, email } = user;
-    return { id, username, fullname, email, roles: [] };
+    const { id, username, fullname, email, roles } = user;
+    return { id, username, fullname, email, roles };
   }
 
   private jwtErrorHandler(

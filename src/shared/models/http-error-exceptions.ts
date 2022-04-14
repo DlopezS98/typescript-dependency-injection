@@ -36,3 +36,9 @@ export class UnauthorizedException extends HttpException {
     super({ message, data, statusCode: HttpStatusCodes.Unauthorized });
   }
 }
+
+export class ForbbidenException extends HttpException {
+  constructor(message: string, data?: Record<string, unknown>) {
+    super({ message, data, statusCode: HttpStatusCodes.Forbidden });
+  }
+}

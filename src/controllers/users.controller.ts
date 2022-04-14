@@ -19,9 +19,10 @@ import { SuccessResponse } from '@Shared/models/http.response';
 import StatusCodes from '@Shared/types/http-status-codes';
 import { HttpResponse } from '@Shared/types/common.cd';
 import Middlewares from '@Middlewares/middlewares.mapping';
+import RolesAuth from '@Middlewares/roles.middleware';
 import BaseController from './base.controller';
 
-@controller('/users', Middlewares.JwtAuth)
+@controller('/users', Middlewares.JwtAuth, RolesAuth('Admin'))
 export default class UsersController extends BaseController {
   private readonly usersService: IUsersService;
 
