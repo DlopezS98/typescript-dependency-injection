@@ -18,6 +18,8 @@
     "url": "git+https://github.com/DlopezS98/typescript-dependency-injection.git"
   },
   "author": "Danny López",
+  "email": "01dlopezs98@gmail.com",
+  "author_url": "https://github.com/DlopezS98",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DlopezS98/typescript-dependency-injection/issues"
