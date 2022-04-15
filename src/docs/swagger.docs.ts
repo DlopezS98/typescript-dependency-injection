@@ -1,6 +1,12 @@
 import swaggerJSDoc, { OAS3Definition, OAS3Options } from 'swagger-jsdoc';
 
 import pkg from '../../package.json';
+import schemas from './swagger.schemas';
+import authentication from './authentication.paths';
+import users from './users.paths';
+import swaggerTags, { getTags } from './swagger.tags';
+
+const tags = getTags(swaggerTags);
 
 const swaggerDefinition: OAS3Definition = {
   openapi: '3.0.1',
@@ -23,6 +29,11 @@ const swaggerDefinition: OAS3Definition = {
       description: 'development',
     },
   ],
+  tags,
+  paths: {
+    ...authentication,
+    ...users,
+  },
   components: {
     securitySchemes: {
       bearerAuth: {
@@ -30,6 +41,7 @@ const swaggerDefinition: OAS3Definition = {
         scheme: 'Bearer',
       },
     },
+    schemas,
   },
 };
 
