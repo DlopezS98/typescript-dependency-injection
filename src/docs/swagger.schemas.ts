@@ -57,6 +57,17 @@ const schemas: Components['schemas'] = {
       roles: { type: 'array', items: { type: 'string' } },
     },
   },
+  UserRequest: {
+    type: 'object',
+    properties: {
+      username: { type: 'string' },
+      firstname: { type: 'string' },
+      lastname: { type: 'string' },
+      email: { type: 'string' },
+      password: { type: 'string' },
+      roles: { type: 'array', items: { type: 'string' } },
+    }
+  }
 };
 
 export default schemas;
