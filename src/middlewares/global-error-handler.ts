@@ -15,7 +15,7 @@ const ErrorMiddlewareHandler = (
   res: Response<HttpResponse<unknown>>,
   next: NextFunction
 ): void => {
-  if (customObjectGuard<HttpException>('statusCode', error))
+  if (customObjectGuard<HttpException>('statusCode', error)) {
     res.status(error.statusCode).json(
       new ErrorResponse({
         message: error.message,
@@ -24,7 +24,10 @@ const ErrorMiddlewareHandler = (
       })
     );
 
-  if (errorGuard(error))
+    return next(error);
+  }
+
+  if (errorGuard(error)) {
     res.status(StatusCodes.InternalServerError).json(
       new ErrorResponse({
         message: error.message,
@@ -33,12 +36,17 @@ const ErrorMiddlewareHandler = (
       })
     );
 
+    return next(error);
+  }
+
   res.status(StatusCodes.InternalServerError).json(
     new ErrorResponse({
       statusCode: StatusCodes.InternalServerError,
       data: error,
     })
   );
+
+  return next(error);
 };
 
 export default ErrorMiddlewareHandler as ErrorRequestHandler;

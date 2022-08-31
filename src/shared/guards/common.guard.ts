@@ -8,7 +8,7 @@ export default function typeGuard<T extends Sentinel>(
 }
 
 export const errorGuard = (error: unknown): error is Error => {
-  const isObject = typeGuard<'object'>(error, 'object');
+  const isObject = typeGuard(error, 'object');
   return isObject ? 'message' in error && 'stack' in error : false;
 };
 
@@ -16,7 +16,7 @@ export const customObjectGuard = <T>(
   searchProperty: keyof T,
   object: unknown
 ): object is T => {
-  const isObject = typeGuard<'object'>(object, 'object');
+  const isObject = typeGuard(object, 'object');
   return isObject ? searchProperty in object : false;
 };
 
@@ -25,6 +25,6 @@ export const guardObjectArray = <T>(
   array: Array<unknown>
 ): array is Array<T> => {
   const firstelement = array[0];
-  const isObject = typeGuard<'object'>(firstelement, 'object');
+  const isObject = typeGuard(firstelement, 'object');
   return isObject ? searchProperty in firstelement : false;
 };
